@@ -1,4 +1,5 @@
 ﻿using BurnerApp.Model;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,11 @@ namespace BurnerApp.Data.Repository
 {
     public class UserRepository : IUserRepository
     {
+        private PostgreSQLConfiguration _configuration;
+        public UserRepository(PostgreSQLConfiguration configuration) => _configuration = configuration;
+        
+        protected NpgsqlConnection dbConnection() => new NpgsqlConnection(_configuration._connectionString);
+
         public Task<bool> Create(User user)
         {
             throw new NotImplementedException();
