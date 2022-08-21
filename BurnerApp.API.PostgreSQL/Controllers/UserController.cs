@@ -44,5 +44,57 @@ namespace BurnerApp.API.PostgreSQL.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [HttpPut("")]
+        public async Task<IActionResult> Update([FromBody] User user)
+        {
+            try
+            {
+                if (user == null)
+                    return BadRequest();
+
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                return Ok(await _userService.Update(user));
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+
+        [HttpGet("{Id}")]
+        public async Task<ActionResult> GetOne(int Id)
+        {
+            try
+            {
+                var result = await _userService.GetById(Id);
+
+                if (result == null)
+                    return NotFound();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<ActionResult> Remove(int Id)
+        {
+            try
+            {
+                return Ok(await _userService.Delete(Id));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

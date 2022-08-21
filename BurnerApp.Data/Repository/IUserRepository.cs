@@ -13,6 +13,6 @@ namespace BurnerApp.Data.Repository
         Task<User> GetById(int Id);
         Task<bool> Create(User user);
         Task<bool> Update(User user);
-        Task<bool> Delete(User user);
+        Task<bool> Delete(int id);
     }
 }

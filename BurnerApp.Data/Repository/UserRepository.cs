@@ -26,7 +26,7 @@ namespace BurnerApp.Data.Repository
                             VALUES (@Name,@Username,@Email,@Phone,@Website);
                           ";
                 var result = await db.ExecuteAsync(sql, new { 
-                   user.Username, user.Email, user.Phone, user.Website
+                   user.Name, user.Username, user.Email, user.Phone, user.Website
                 });
 
                 return result > 0;
@@ -84,7 +84,7 @@ namespace BurnerApp.Data.Repository
                 var db = DbConnection();
 
                 var sql = @"
-                            UPDATE INTO public.""users"" (name,username,email,phone,website)
+                            UPDATE public.""users""
                             SET 
                                 name = @name,
                                 username = @Username,
@@ -113,7 +113,7 @@ namespace BurnerApp.Data.Repository
                 throw new Exception(ex.Message);
             }
         } 
-        public async Task<bool> Delete(User user)
+        public async Task<bool> Delete(int id)
         {
             try
             {
@@ -121,13 +121,13 @@ namespace BurnerApp.Data.Repository
 
                 var sql = @"
                             DELETE
-                            FROM public.""users"" (name,username,email,phone,website)
+                            FROM public.""users""
                             WHERE id = @Id
                           ";
 
                 var result = await db.ExecuteAsync(sql, new
                 {
-                    user.Id
+                    Id = id
                 });
 
                 return result > 0;
