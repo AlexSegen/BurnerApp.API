@@ -1,4 +1,6 @@
-﻿using BurnerApp.Data.Repository;
+﻿using BurnerApp.API.PostgreSQL.Models;
+using BurnerApp.Data.Repository;
+using BurnerApp.Data.Services;
 using BurnerApp.Model;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,20 +10,20 @@ namespace BurnerApp.API.PostgreSQL.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IUserRepository _userService;
-        public UserController(IUserRepository userService) => _userService = userService;
+        private readonly IUserService _userService;
+        public UserController(IUserService userService) => _userService = userService;
 
         [HttpGet("")]
         public async Task<IActionResult> GetAll()
         {
             try
             {
-                return Ok(await _userService.GetAll());
-
+                var result = await _userService.GetAll();
+                return StatusCode(result.Status, result);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                return StatusCode(500, new Response<dynamic>(ex.Message, 500));
             }
         }
 
@@ -31,37 +33,19 @@ namespace BurnerApp.API.PostgreSQL.Controllers
             try
             {
                 if (user == null)
-                    return BadRequest();
+                    return StatusCode(400, new Response<dynamic>("Invalid information. User data is required.", 400));
 
                 if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
+                    return StatusCode(400, new Response<dynamic>(ModelState, "Missing required information.", 400));
 
-                return Ok(await _userService.Create(user));
+                var result = await _userService.CreateOrUpdate(user);
+
+                return StatusCode(result.Status, result);
 
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
-            }
-        }
-
-        [HttpPut("")]
-        public async Task<IActionResult> Update([FromBody] User user)
-        {
-            try
-            {
-                if (user == null)
-                    return BadRequest();
-
-                if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
-
-                return Ok(await _userService.Update(user));
-
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
+                 return StatusCode(500, new Response<dynamic>(ex.Message, 500));
             }
         }
 
@@ -73,14 +57,11 @@ namespace BurnerApp.API.PostgreSQL.Controllers
             {
                 var result = await _userService.GetById(Id);
 
-                if (result == null)
-                    return NotFound();
-
-                return Ok(result);
+                return StatusCode(result.Status, result);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                 return StatusCode(500, new Response<dynamic>(ex.Message, 500));
             }
         }
 
@@ -89,11 +70,12 @@ namespace BurnerApp.API.PostgreSQL.Controllers
         {
             try
             {
-                return Ok(await _userService.Delete(Id));
+                var result = await _userService.Delete(Id);
+                return StatusCode(result.Status, result);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                 return StatusCode(500, new Response<dynamic>(ex.Message, 500));
             }
         }
     }

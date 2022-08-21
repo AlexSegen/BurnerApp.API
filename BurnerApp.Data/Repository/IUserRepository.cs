@@ -9,10 +9,9 @@ namespace BurnerApp.Data.Repository
 {
     public interface IUserRepository
     {
-        Task<IEnumerable<User>> GetAll();
-        Task<User> GetById(int Id);
-        Task<bool> Create(User user);
-        Task<bool> Update(User user);
+        Task<List<User>> GetAll();
+        Task<User?> GetById(int Id);
+        Task<User?> CreateOrUpdate(User user);
         Task<bool> Delete(int id);
     }
 }

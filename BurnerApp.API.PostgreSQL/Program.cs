@@ -1,5 +1,6 @@
 using BurnerApp.Data;
 using BurnerApp.Data.Repository;
+using BurnerApp.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddSingleton(postgreSQLConnectionConfiguration);
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Add services to the container.
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
