@@ -6,7 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // PostgreSQL Injection
 ConfigurationManager configuration = builder.Configuration;
-var postgreSQLConnectionConfiguration = new PostgreSQLConfiguration(configuration.GetConnectionString("PostgreSQLConnection");
+var postgreSQLConnectionConfiguration = 
+    new PostgreSQLConfiguration(configuration.GetConnectionString("PostgreSQLConnection"));
 builder.Services.AddSingleton(postgreSQLConnectionConfiguration);
 
 // Add repositories to the container.

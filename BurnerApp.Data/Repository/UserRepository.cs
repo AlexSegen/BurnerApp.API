@@ -1,4 +1,5 @@
 ﻿using BurnerApp.Model;
+using Dapper;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -12,32 +13,131 @@ namespace BurnerApp.Data.Repository
     {
         private PostgreSQLConfiguration _configuration;
         public UserRepository(PostgreSQLConfiguration configuration) => _configuration = configuration;
-        
-        protected NpgsqlConnection dbConnection() => new NpgsqlConnection(_configuration._connectionString);
+        protected NpgsqlConnection DbConnection() => new(_configuration._connectionString);
 
-        public Task<bool> Create(User user)
+        public async Task<bool> Create(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var db = DbConnection();
+
+                var sql = @"
+                            INSERT INTO public.""users"" (name,username,email,phone,website) 
+                            VALUES (@Name,@Username,@Email,@Phone,@Website);
+                          ";
+                var result = await db.ExecuteAsync(sql, new { 
+                   user.Username, user.Email, user.Phone, user.Website
+                });
+
+                return result > 0;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
         }
-
-        public Task<bool> Delete(User user)
+        public async Task<IEnumerable<User>> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var db = DbConnection();
+
+                var sql = @"
+                            SELECT id, name, username, email, phone, website
+                            FROM public.""users""
+                          ";
+                return await db.QueryAsync<User>(sql, new { });
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
         }
-
-        public Task<IEnumerable<User>> GetAll()
+        public async Task<User> GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var db = DbConnection();
+
+                var sql = @"
+                            SELECT id, name, username, email, phone, website
+                            FROM public.""users""
+                            WHERE id = @Id
+                          ";
+                return await db.QueryFirstOrDefaultAsync<User>(sql, new { Id = id });
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
         }
-
-        public Task<User> GetById(int Id)
+        public async Task<bool> Update(User user)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                var db = DbConnection();
 
-        public Task<bool> Update(User user)
+                var sql = @"
+                            UPDATE INTO public.""users"" (name,username,email,phone,website)
+                            SET 
+                                name = @name,
+                                username = @Username,
+                                email = @Email,
+                                phone = @Phone,
+                                website = @Website
+                            WHERE id = @Id
+                          ";
+                
+                var result = await db.ExecuteAsync(sql, new
+                {
+                    user.Id,
+                    user.Name,
+                    user.Username,
+                    user.Email,
+                    user.Phone,
+                    user.Website
+                });
+
+                return result > 0;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        } 
+        public async Task<bool> Delete(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var db = DbConnection();
+
+                var sql = @"
+                            DELETE
+                            FROM public.""users"" (name,username,email,phone,website)
+                            WHERE id = @Id
+                          ";
+
+                var result = await db.ExecuteAsync(sql, new
+                {
+                    user.Id
+                });
+
+                return result > 0;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
