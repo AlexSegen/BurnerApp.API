@@ -1,9 +1,10 @@
 ﻿using BurnerApp.API.PostgreSQL.Models;
+using BurnerApp.API.PostgreSQL.Queries;
 using BurnerApp.Data.Services;
 using BurnerApp.Model;
 using MediatR;
 
-namespace BurnerApp.API.PostgreSQL.Queries
+namespace BurnerApp.API.PostgreSQL.Handlers
 {
     public class GetUserQueryHandler : IRequestHandler<GetUserQuery, Response<User>>
     {
