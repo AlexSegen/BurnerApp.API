@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurnerApp.API.PostgreSQL", "BurnerApp.API.PostgreSQL\BurnerApp.API.PostgreSQL.csproj", "{F718929D-B0CE-4769-929D-46E8C76CF02A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BurnerApp.API.PostgreSQL", "BurnerApp.API.PostgreSQL\BurnerApp.API.PostgreSQL.csproj", "{F718929D-B0CE-4769-929D-46E8C76CF02A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurnerApp.Data", "BurnerApp.Data\BurnerApp.Data.csproj", "{769BF256-5288-4D86-A039-957916CA16A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BurnerApp.Data", "BurnerApp.Data\BurnerApp.Data.csproj", "{769BF256-5288-4D86-A039-957916CA16A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurnerApp.Model", "BurnerApp.Model\BurnerApp.Model.csproj", "{13908EDE-992E-4B2A-9DA0-0F22F89DBBCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BurnerApp.Model", "BurnerApp.Model\BurnerApp.Model.csproj", "{13908EDE-992E-4B2A-9DA0-0F22F89DBBCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
