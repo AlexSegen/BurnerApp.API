@@ -1,4 +1,4 @@
-﻿using BurnerApp.API.PostgreSQL.Models;
+﻿using BurnerApp.API.Models;
 using BurnerApp.Data.Repository;
 using BurnerApp.Model;
 

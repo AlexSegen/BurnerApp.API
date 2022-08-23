@@ -1,13 +1,11 @@
-﻿using BurnerApp.API.PostgreSQL.Commands;
-using BurnerApp.API.PostgreSQL.Models;
-using BurnerApp.API.PostgreSQL.Queries;
-using BurnerApp.Data.Repository;
-using BurnerApp.Data.Services;
+﻿using MediatR;
 using BurnerApp.Model;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using BurnerApp.API.Models;
+using BurnerApp.API.Features.Users.Queries;
+using BurnerApp.API.Features.Users.Commands;
 
-namespace BurnerApp.API.PostgreSQL.Controllers
+namespace BurnerApp.API.Features.Users
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -67,7 +65,7 @@ namespace BurnerApp.API.PostgreSQL.Controllers
             }
             catch (Exception ex)
             {
-                 return StatusCode(500, new Response<dynamic>(ex.Message, 500));
+                return StatusCode(500, new Response<dynamic>(ex.Message, 500));
             }
         }
 
@@ -83,7 +81,7 @@ namespace BurnerApp.API.PostgreSQL.Controllers
             }
             catch (Exception ex)
             {
-                 return StatusCode(500, new Response<dynamic>(ex.Message, 500));
+                return StatusCode(500, new Response<dynamic>(ex.Message, 500));
             }
         }
     }

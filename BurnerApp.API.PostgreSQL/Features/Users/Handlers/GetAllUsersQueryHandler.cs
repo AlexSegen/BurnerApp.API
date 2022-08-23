@@ -1,10 +1,10 @@
-﻿using BurnerApp.API.PostgreSQL.Models;
-using BurnerApp.API.PostgreSQL.Queries;
+﻿using BurnerApp.API.Models;
+using BurnerApp.API.Features.Users.Queries;
 using BurnerApp.Data.Services;
 using BurnerApp.Model;
 using MediatR;
 
-namespace BurnerApp.API.PostgreSQL.Handlers
+namespace BurnerApp.API.Features.Users.Handlers
 {
     public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, Response<List<User>>>
     {

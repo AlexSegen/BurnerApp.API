@@ -1,8 +1,8 @@
-﻿using BurnerApp.API.PostgreSQL.Models;
+﻿using BurnerApp.API.Models;
 using BurnerApp.Model;
 using MediatR;
 
-namespace BurnerApp.API.PostgreSQL.Queries
+namespace BurnerApp.API.Features.Users.Queries
 {
     public class GetUserQuery : IRequest<Response<User>>
     {

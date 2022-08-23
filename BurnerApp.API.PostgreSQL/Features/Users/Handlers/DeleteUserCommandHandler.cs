@@ -1,9 +1,9 @@
-﻿using BurnerApp.API.PostgreSQL.Commands;
-using BurnerApp.API.PostgreSQL.Models;
+﻿using BurnerApp.API.Features.Users.Commands;
+using BurnerApp.API.Models;
 using BurnerApp.Data.Services;
 using MediatR;
 
-namespace BurnerApp.API.PostgreSQL.Handlers
+namespace BurnerApp.API.Features.Users.Handlers
 {
     public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Response<bool>>
     {

@@ -1,4 +1,4 @@
-﻿namespace BurnerApp.API.PostgreSQL.Models
+﻿namespace BurnerApp.API.Models
 {
     public class Response<T>
     {

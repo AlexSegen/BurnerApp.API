@@ -1,10 +1,5 @@
-﻿using BurnerApp.API.PostgreSQL.Models;
+﻿using BurnerApp.API.Models;
 using BurnerApp.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnerApp.Data.Services
 {

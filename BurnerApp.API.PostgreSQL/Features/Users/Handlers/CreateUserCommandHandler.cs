@@ -1,10 +1,10 @@
-﻿using BurnerApp.API.PostgreSQL.Commands;
-using BurnerApp.API.PostgreSQL.Models;
-using BurnerApp.Data.Services;
+﻿using MediatR;
 using BurnerApp.Model;
-using MediatR;
+using BurnerApp.Data.Services;
+using BurnerApp.API.Models;
+using BurnerApp.API.Features.Users.Commands;
 
-namespace BurnerApp.API.PostgreSQL.Handlers
+namespace BurnerApp.API.Features.Users.Handlers
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Response<User>>
     {
