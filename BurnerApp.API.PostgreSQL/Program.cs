@@ -18,7 +18,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 // Add services to the container.
 builder.Services.AddScoped<IUserService, UserService>();
 
-builder.Services.AddMediatR(typeof(Program));
+// builder.Services.AddMediatR(typeof(Program));
+builder.Services.AddMediatR(x => x.AsScoped(), typeof(Program));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
