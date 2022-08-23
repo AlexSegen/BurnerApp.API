@@ -2,7 +2,8 @@ CREATE OR REPLACE FUNCTION public.fn_set_user(userid integer, iname character va
  RETURNS SETOF json
  LANGUAGE plpgsql
 AS $function$
-DECLARE
+declare
+	next_id integer;
     salida json;
 BEGIN
 
@@ -12,10 +13,14 @@ BEGIN
 		
 	else
 	
+	 	--SELECT currval(pg_get_serial_sequence('users','id')) into next_id;
 		insert into users
 		(name,username,email,phone,website) 
 		values
-		(iname,iusername,iemail,iphone,iwebsite);
+		(iname,iusername,iemail,iphone,iwebsite)  RETURNING id into next_id;
+	
+		return query (SELECT fn_get_user_by_id(next_id));
+
 	
 	end if;
 	

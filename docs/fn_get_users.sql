@@ -9,6 +9,8 @@ AS $function$
 		*
 	from 
 		users
+	
+	order by id asc
 		
  ) as output;
 
